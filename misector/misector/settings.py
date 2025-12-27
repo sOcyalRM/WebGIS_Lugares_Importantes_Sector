@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+#Es necesario agregar los siguientes path / Obtenidos de respuesta en stack overflow: The solution was to manually set GDAL_LIBRARY_PATH (link) and GEOS_LIBRARY_PATH (link) in settings.py:
+#Seguir siguiente link: https://gis.stackexchange.com/questions/412950/gdal-configuration-for-django-in-mac-gdal-library-path-exception
+#GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
+#GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,8 +81,11 @@ WSGI_APPLICATION = 'misector.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'misector',
+        'USER': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
