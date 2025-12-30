@@ -1,23 +1,24 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.core.serializers import serialize
-from .models import Lugar
+from .models import Lugar, Ciudad, Categoria
+from .serializers import SerializadorCategoria, SerializadorLugar
+from rest_framework import generics
 
 # Create your views here.
+class ListaCategoria (generics.ListAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = SerializadorCategoria
+    name = 'lista-categoria'
 
-def todos_lugares(request):
-    queryset = Lugar.objects.all()
-    geojason = serialize('geojson', queryset, geometry_field = 'polygon_geom', srid = 3857)
-    return HttpResponse(geojason, content_type = 'application/json')
+class DetalleCategoria (generics.RetrieveAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = SerializadorCategoria
+    name = 'detalle-categoria'
 
-def detalle_lugar(request, pk):
-    data = []
+class ListaLugar(generics.ListAPIView):
+    queryset = Lugar.objects.filter(activo = True)
+    serializer_class = SerializadorLugar
+    name = 'lista-lugares'
 
-    try:
-        lugar = Lugar.objects.get(pk = pk)
-        data.append(lugar)
-    except Lugar.DoesNotExist:
-        pass
-
-    geojson = serialize('geojson', data, geometry_field = 'polygon_geom', srid = 3857)
-    return HttpResponse(geojson, content_type= 'application/json')
+class DetalleLugar(generics.RetrieveAPIView):
+    queryset = Lugar.objects.filter(activo = True)
+    serializer_class = SerializadorLugar
+    name = 'detalle-lugares'

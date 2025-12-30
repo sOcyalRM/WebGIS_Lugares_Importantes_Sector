@@ -52,6 +52,9 @@ INSTALLED_APPS = [
 
     #Third party apps
     'django_cleanup.apps.CleanupConfig',#para eliminar registros con imagen, en admin
+    'rest_framework',
+    'rest_framework_gis',
+
 ]
 
 MIDDLEWARE = [
