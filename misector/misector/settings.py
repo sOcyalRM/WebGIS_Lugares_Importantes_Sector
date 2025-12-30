@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 #Es necesario agregar los siguientes path / Obtenidos de respuesta en stack overflow: The solution was to manually set GDAL_LIBRARY_PATH (link) and GEOS_LIBRARY_PATH (link) in settings.py:
 #Seguir siguiente link: https://gis.stackexchange.com/questions/412950/gdal-configuration-for-django-in-mac-gdal-library-path-exception
 #GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
@@ -44,6 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+
+    #Local Apps
+    'mcbackend.apps.McbackendConfig',
+    'mcfrontend.apps.McfrontendConfig',
+
+    #Third party apps
+    'django_cleanup.apps.CleanupConfig',#para eliminar registros con imagen, en admin
 ]
 
 MIDDLEWARE = [
@@ -125,6 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
