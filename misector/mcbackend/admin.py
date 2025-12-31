@@ -1,5 +1,6 @@
 from django.contrib.gis import admin
 from .models import Lugar, Categoria, Ciudad
+from leaflet.admin import LeafletGeoAdmin #Con esta configuracion puedo obtener un mapa satelital para agregar lugares
 
 # Register your models here.
 admin.site.register(Categoria)

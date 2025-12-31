@@ -54,8 +54,24 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',#para eliminar registros con imagen, en admin
     'rest_framework',
     'rest_framework_gis',
+    'leaflet',#Con esta configuracion puedo obtener un mapa satelital para agregar lugares
 
 ]
+
+LEAFLET_CONFIG = { #Con esta configuracion puedo obtener un mapa satelital para agregar lugares
+    'DEFAULT_CENTER': (18.5177, -69.9843,),  # ajusta a tu país
+    'DEFAULT_ZOOM': 14,
+    'TILES': [
+        (
+            'Satélite',
+            'https://server.arcgisonline.com/ArcGIS/rest/services/'
+            'World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                'attribution': 'Tiles © Esri'
+            }
+        ),
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
