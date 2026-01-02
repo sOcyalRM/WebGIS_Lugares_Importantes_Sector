@@ -52,18 +52,34 @@ function init(){
         })
     }
 
+    //Agregando las 3 ciudades mas cercanas
+    var nearByCitiesGeoJSONLayer;
     const addNearByCities = (geoJSON) =>{
-        console.log(geoJSON)
+        if (nearByCitiesGeoJSONLayer){
+            map.removeLayer(nearByCitiesGeoJSONLayer)
+        }
+
+        nearByCitiesGeoJSONLayer = L.geoJSON(geoJSON, {
+            onEachFeature: (feature, layer) => {
+            let nombreCiudad = feature.properties.nombre_ciudad;
+            let proximidad = feature.properties.proximity;
+            let roundProximity = proximidad.toFixed(2);
+            layer.bindPopup(`Nombre de la ciudad: ${nombreCiudad}, <br/>proximidad: ${roundProximity} km`)
+
+            }
+        }).addTo(map)
     }
 
+    //// Logica Agregando 3 ciudades cercanas
     const addNearByCitiesLogic = (id) =>{
         let url = `http://127.0.0.1:8000/api/v1/ciudades/?lugarID=${id}`;//Referencia: Models.py
         fetchGetRequest(url, addNearByCities)
     }
 
-    const placeImageElement = document.getElementById('placeimage');
+    const placeImageElement = document.getElementById('imagenlugar');
     const menuTitleElement = document.getElementById('menu_title');
     const menuTextElement = document.getElementById('menu_text');
+    
 
     const onEachFeatureHandler = (feature, layer) => {
         let nombreLugar = feature.properties.nombre_lugar

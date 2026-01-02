@@ -8,12 +8,12 @@ body{
     overflow: auto;
 }
 
-#map {
+#map { /* Usar # cuando el elemento html es declarado como id*/
     height: 100vh;
     width: 55vw;
 }
 
-.grid-container {
+.grid-container { /* Usar . cuando el elemento html es declarado como clase*/
     display: grid;
     grid-template-columns: 55vw 45vw;
     grid-template-rows: 100vh;

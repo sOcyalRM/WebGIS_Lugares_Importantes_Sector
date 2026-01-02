@@ -12,12 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<div id="grid-container">
-    <div id="grid-1">
+<div class="grid-container"> <!--Asegurarte no utilizar id en div sino class. De lo contrario el comportamiento no sera el esperado-->
+    <div class="grid-1">
         <div id="map"></div>
     </div>
 
-    <div id="grid-2">
+    <div class="grid-2">
         <div class="column-menu" id="menu-information">
             <p id="menu_title"> Bienvenidos al Mapa de Lugares Conocidos de mi Barrio</p>
             <img src="./media/imagen_lugar/Mi_casa.jpeg" alt="Imagen Anacaona" id="imagenlugar">
